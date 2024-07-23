@@ -484,7 +484,7 @@ bool e2sm_kpm_du_meas_provider_impl::get_ta(const asn1::e2sm::label_info_list_l 
 
   meas_record_item_c meas_record_item;
   // [issue] Improve the handling of std::optional
-  meas_record_item.set_integer() = ue_metrics.last_ta.has_value() ? ue_metrics.last_ta.value() : 0;
+  meas_record_item.set_real().value = ue_metrics.last_ta.has_value() ? ue_metrics.last_ta.value().to_seconds() : 0;
   items.push_back(meas_record_item);
   meas_collected = true;
 
