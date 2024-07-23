@@ -38,6 +38,39 @@ e2sm_kpm_du_meas_provider_impl::e2sm_kpm_du_meas_provider_impl(srs_du::f1ap_ue_i
       "RSRQ", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, false, &e2sm_kpm_du_meas_provider_impl::get_rsrq});
 
   supported_metrics.emplace(
+      "SNR", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_pusch_snr});
+  supported_metrics.emplace(
+      "PCI", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_pci});
+  supported_metrics.emplace(
+      "RNTI", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_rnti});
+  supported_metrics.emplace(
+      "BrateDl", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_brate_dl});
+  supported_metrics.emplace(
+      "BrateUl", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_brate_ul});
+  supported_metrics.emplace(
+      "McsDl", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_mcs_dl});
+  supported_metrics.emplace(
+      "McsUl", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_mcs_ul});
+  supported_metrics.emplace(
+      "NofOKDl", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_nof_ok_dl});
+  supported_metrics.emplace(
+      "NofOKUl", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_nof_ok_ul});
+  supported_metrics.emplace(
+      "NofNOKDl", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_nof_nok_dl});
+  supported_metrics.emplace(
+      "NofNOKUl", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_nof_nok_ul});
+  supported_metrics.emplace(
+      "BSR", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_bsr});
+  supported_metrics.emplace(
+      "BSDl", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_dl_bs});
+  supported_metrics.emplace(
+      "TA", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_ta});
+  supported_metrics.emplace(
+      "PHR", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_phr});
+  supported_metrics.emplace(
+      "RI", e2sm_kpm_supported_metric_t{NO_LABEL, ALL_LEVELS, true, &e2sm_kpm_du_meas_provider_impl::get_ri});
+
+  supported_metrics.emplace(
       "RRU.PrbAvailDl",
       e2sm_kpm_supported_metric_t{
           NO_LABEL, E2_NODE_LEVEL | UE_LEVEL, true, &e2sm_kpm_du_meas_provider_impl::get_prb_avail_dl});
@@ -291,6 +324,86 @@ bool e2sm_kpm_du_meas_provider_impl::get_meas_data(const asn1::e2sm::meas_type_c
   return (this->*metric_meas_getter_func)(label_info_list, ues, cell_global_id, items);
 }
 
+bool e2sm_kpm_du_meas_provider_impl::get_brate_dl(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_real().value = ue_metrics.dl_brate_kbps;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_brate_ul(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_real().value = ue_metrics.ul_brate_kbps;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_mcs_dl(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = (int) ue_metrics.dl_mcs.to_uint();
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_mcs_ul(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = (int)ue_metrics.ul_mcs.to_uint();
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_pusch_snr(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = (int)ue_metrics.pusch_snr_db;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
 bool e2sm_kpm_du_meas_provider_impl::get_cqi(const asn1::e2sm::label_info_list_l          label_info_list,
                                              const std::vector<asn1::e2sm::ue_id_c>&      ues,
                                              const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
@@ -300,9 +413,191 @@ bool e2sm_kpm_du_meas_provider_impl::get_cqi(const asn1::e2sm::label_info_list_l
   scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
 
   meas_record_item_c meas_record_item;
+  // [issue] Improve the handling of std::optional
   meas_record_item.set_integer() = ue_metrics.cqi_stats.get_nof_observations() > 0
                                        ? static_cast<uint64_t>(std::roundf(ue_metrics.cqi_stats.get_mean()))
                                        : 0;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_ri(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  // [issue] Improve the handling of std::optional
+  meas_record_item.set_integer() = ue_metrics.ri_stats.get_nof_observations() > 0
+                                       ? static_cast<uint64_t>(std::roundf(ue_metrics.ri_stats.get_mean()))
+                                       : 0;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_pci(const asn1::e2sm::label_info_list_l          label_info_list,
+                                              const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                              const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                              std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = (uint16_t) ue_metrics.pci;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_rnti(const asn1::e2sm::label_info_list_l          label_info_list,
+                                              const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                              const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                              std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = (uint16_t) ue_metrics.rnti;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_ta(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  // [issue] Improve the handling of std::optional
+  meas_record_item.set_integer() = ue_metrics.last_ta.has_value() ? ue_metrics.last_ta.value() : 0;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_phr(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  // [issue] Improve the handling of std::optional
+  meas_record_item.set_integer() = ue_metrics.last_phr.has_value() ? ue_metrics.last_phr.value() : 0;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_nof_ok_ul(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = ue_metrics.ul_nof_ok;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_nof_ok_dl(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = ue_metrics.dl_nof_ok;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_nof_nok_dl(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = ue_metrics.dl_nof_nok;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_nof_nok_ul(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = ue_metrics.ul_nof_nok;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_bsr(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = ue_metrics.bsr;
+  items.push_back(meas_record_item);
+  meas_collected = true;
+
+  return meas_collected;
+}
+
+bool e2sm_kpm_du_meas_provider_impl::get_dl_bs(const asn1::e2sm::label_info_list_l          label_info_list,
+                                             const std::vector<asn1::e2sm::ue_id_c>&      ues,
+                                             const std::optional<asn1::e2sm::cgi_c>       cell_global_id,
+                                             std::vector<asn1::e2sm::meas_record_item_c>& items)
+{
+  bool                 meas_collected = false;
+  scheduler_ue_metrics ue_metrics     = last_ue_metrics[0];
+
+  meas_record_item_c meas_record_item;
+  meas_record_item.set_integer() = ue_metrics.dl_bs;
   items.push_back(meas_record_item);
   meas_collected = true;
 

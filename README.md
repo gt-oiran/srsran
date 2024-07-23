@@ -88,3 +88,33 @@ How to deploy a 5G network?
 ----------------------------------------------
 
 Check our [tutorials](https://docs.srsran.com/projects/project/en/latest/tutorials/source/index.html) that describe how to set up an end-to-end 5G SA system with srsRAN Project.
+
+[OIRAN] Exposed metrics for e2sm_kpm
+----------------------------------------------
+
+| **Metric** | **Description** |
+|-------------|---------------|
+| PCI         | Physical Cell Identifier |
+| RNTI        | Radio Network Temporary Identifier (UE identifier) |
+| McsDl       | Dl Modulation and coding scheme (0-28) |
+| McsUl       | Ul Modulation and coding scheme (0-28) |
+| BrateDl     | Dl bitrate in kbps |
+| BrateUl     | Ul bitrate in kbps |
+| NofOkDl     | Dl Number of packets successfully sent |
+| NofNOkDl    | Dl Number of packets dropped |
+| NofOkUl     | Ul Number of packets successfully sent |
+| NofNOkUl    | Ul Number of packets dropped |
+| SNR         | PUSCH SINR (Signal-to-Interference-plus-Noise Ratio) |
+| RSRP        | Reference Signal Received Power |
+| BSR         | Buffer Status Report, data waiting to be transmitted as reported by the UE (bytes) |
+| BSDl        | Downlink Buffer Status, data waiting to be transmitted as reported by the gNB (bytes) |
+| TA          | Timing Advance in microseconds |
+| PHR         | Power Headroom as reported by the UE |
+| CQI         | Channel Quality Indicator reported by the UE (1-15) |
+| RA          | Rank Indicator as reported by the UE |
+| DRB.UEThpDl | DL throughput |
+| DRB.UEThpUl | UL throughput |
+| DRB.RlcPacketDropRateDl | UL packet success rate |
+| DRB.PacketSuccessRateUlgNBUu | RLC DL packet drop rate |
+| DRB.RlcSduTransmittedVolumeDL | RLC DL transmitted SDU volume |
+| DRB.RlcSduTransmittedVolumeUL | RLC UL transmitted SDU volume |

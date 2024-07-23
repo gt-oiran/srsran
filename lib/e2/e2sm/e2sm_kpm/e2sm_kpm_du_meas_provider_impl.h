@@ -110,6 +110,24 @@ private:
   metric_meas_getter_func_t get_drb_ul_mean_throughput;
   metric_meas_getter_func_t get_drb_rlc_sdu_latency;
 
+  // New measurement getter functions.
+  metric_meas_getter_func_t get_pci;
+  metric_meas_getter_func_t get_rnti;
+  metric_meas_getter_func_t get_mcs_dl;
+  metric_meas_getter_func_t get_mcs_ul;
+  metric_meas_getter_func_t get_brate_dl;
+  metric_meas_getter_func_t get_brate_ul;
+  metric_meas_getter_func_t get_nof_ok_dl;
+  metric_meas_getter_func_t get_nof_nok_dl;
+  metric_meas_getter_func_t get_nof_ok_ul;
+  metric_meas_getter_func_t get_nof_nok_ul;
+  metric_meas_getter_func_t get_bsr;
+  metric_meas_getter_func_t get_dl_bs;
+  metric_meas_getter_func_t get_ta;
+  metric_meas_getter_func_t get_phr;
+  metric_meas_getter_func_t get_pusch_snr;
+  metric_meas_getter_func_t get_ri;
+
   srslog::basic_logger&                              logger;
   srs_du::f1ap_ue_id_translator&                     f1ap_ue_id_provider;
   std::vector<scheduler_ue_metrics>                  last_ue_metrics;
