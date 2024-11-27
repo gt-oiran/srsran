@@ -1,0 +1,4 @@
+# Directory labels
+ ran
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/ran/pdcch/pdcch_candidates_common_test.cpp

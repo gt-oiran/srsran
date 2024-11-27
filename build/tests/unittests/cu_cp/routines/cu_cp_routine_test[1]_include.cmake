@@ -1,0 +1,5 @@
+if(EXISTS "/home/bezerra/Workspace/srsran/build/tests/unittests/cu_cp/routines/cu_cp_routine_test[1]_tests.cmake")
+  include("/home/bezerra/Workspace/srsran/build/tests/unittests/cu_cp/routines/cu_cp_routine_test[1]_tests.cmake")
+else()
+  add_test(cu_cp_routine_test_NOT_BUILT cu_cp_routine_test_NOT_BUILT)
+endif()

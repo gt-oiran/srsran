@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/bezerra/Workspace/srsran/tests/unittests/adt/bounded_integer_test.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"adt"
+		],
+		"name" : "bounded_integer_test"
+	}
+}

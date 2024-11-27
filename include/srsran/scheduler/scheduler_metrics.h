@@ -27,6 +27,7 @@
 #include "srsran/ran/phy_time_unit.h"
 #include "srsran/ran/rnti.h"
 #include "srsran/ran/sch/sch_mcs.h"
+#include "srsran/ran/slot_point.h"
 #include "srsran/support/stats.h"
 #include <optional>
 
@@ -34,43 +35,62 @@ namespace srsran {
 
 /// \brief Snapshot of the metrics for a UE.
 struct scheduler_ue_metrics {
-  pci_t                        pci; // Physical Cell Identifier
-  unsigned                     nof_prbs; // Number of PRBs
-  rnti_t                       rnti; // Radio Network Temporary Identifier (UE identifier)
-  sch_mcs_index                dl_mcs; // Dl Modulation and coding scheme (0-28)
-  double                       dl_prbs_used; // Number of dl used PRBs
-  double                       dl_brate_kbps; // Ul bitrate
-  unsigned                     dl_nof_ok; // Dl Number of packets successfully sent
-  unsigned                     dl_nof_nok; // Dl Number of packets dropped
-  float                        pusch_snr_db; // PUSCH SINR (Signal-to-Interference-plus-Noise Ratio)
-  float                        pusch_rsrp_db; // Reference Signal Received Power
-  float                        pucch_snr_db; 
-  sch_mcs_index                ul_mcs; // Ul Modulation and coding scheme (0-28)
-  double                       ul_prbs_used; // Number of ul used PRBs
-  double                       ul_brate_kbps; // Ul bitrate
-  unsigned                     ul_nof_ok; // Ul Number of packets successfully sent
-  unsigned                     ul_nof_nok; // Ul Number of packets dropped
-  unsigned                     bsr; // Buffer Status Report, data waiting to be transmitted as reported by the UE (bytes)
-  unsigned                     dl_bs; // Downlink Buffer Status, data waiting to be transmitted as reported by the gNB (bytes)
-  std::optional<phy_time_unit> last_ta; // Timing Advance in microseconds
-  std::optional<int>           last_phr; // Power Headroom as reported by the UE
-
+  pci_t                        pci;
+  rnti_t                       rnti;
+  sch_mcs_index                dl_mcs;
+  unsigned                     tot_dl_prbs_used;
+  double                       mean_dl_prbs_used;
+  double                       dl_brate_kbps;
+  unsigned                     dl_nof_ok;
+  unsigned                     dl_nof_nok;
+  float                        pusch_snr_db;
+  float                        pusch_rsrp_db;
+  float                        pucch_snr_db;
+  sch_mcs_index                ul_mcs;
+  unsigned                     tot_ul_prbs_used;
+  double                       mean_ul_prbs_used;
+  double                       ul_brate_kbps;
+  double                       ul_delay_ms;
+  unsigned                     ul_nof_ok;
+  unsigned                     ul_nof_nok;
+  unsigned                     bsr;
+  unsigned                     dl_bs;
+  std::optional<phy_time_unit> last_ta;
+  std::optional<int>           last_phr;
   /// CQI statistics over the metrics report interval.
   sample_statistics<unsigned> cqi_stats; // Channel Quality Indicator reported by the UE (1-15)
   /// RI statistics over the metrics report interval.
-  sample_statistics<unsigned> ri_stats; // Rank Indicator as reported by the UE
+  sample_statistics<unsigned> ri_stats;
+};
+
+/// \brief Event that occurred in the cell of the scheduler.
+struct scheduler_cell_event {
+  enum class event_type { ue_add, ue_reconf, ue_rem };
+
+  slot_point slot;
+  rnti_t     rnti = rnti_t::INVALID_RNTI;
+  event_type type;
 };
 
 /// \brief Snapshot of the metrics for a cell and its UEs.
 struct scheduler_cell_metrics {
   /// Latency histogram number of bins.
-  constexpr static unsigned latency_hist_bins = 10;
+  static constexpr unsigned latency_hist_bins = 10;
   /// Distance between histogram bins.
-  constexpr static unsigned nof_usec_per_bin = 50;
+  static constexpr unsigned nof_usec_per_bin = 50;
+  /// Number of cell PRBs.
+  unsigned nof_prbs = 0;
+  /// Number of full downlink slots.
+  unsigned nof_dl_slots = 0;
+  /// Number of full uplink slots.
+  unsigned nof_ul_slots = 0;
+  /// Number of PRACH preambles detected.
+  unsigned nof_prach_preambles = 0;
 
   unsigned                                nof_error_indications = 0;
   std::chrono::microseconds               average_decision_latency{0};
   std::array<unsigned, latency_hist_bins> latency_histogram{0};
+  std::vector<scheduler_cell_event>       events;
   std::vector<scheduler_ue_metrics>       ue_metrics;
 };
 

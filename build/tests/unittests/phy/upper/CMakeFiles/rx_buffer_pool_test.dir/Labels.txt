@@ -1,0 +1,4 @@
+# Directory labels
+ phy
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/phy/upper/rx_buffer_pool_test.cpp

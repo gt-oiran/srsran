@@ -1,0 +1,4 @@
+# Directory labels
+ ecpri
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/ofh/ecpri/ecpri_packet_builder_test.cpp

@@ -1,0 +1,5 @@
+if(EXISTS "/home/bezerra/Workspace/srsran/build/tests/integrationtests/phy/upper/channel_processors/pxsch_bler_test[1]_tests.cmake")
+  include("/home/bezerra/Workspace/srsran/build/tests/integrationtests/phy/upper/channel_processors/pxsch_bler_test[1]_tests.cmake")
+else()
+  add_test(pxsch_bler_test_NOT_BUILT pxsch_bler_test_NOT_BUILT)
+endif()

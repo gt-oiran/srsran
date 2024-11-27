@@ -1,0 +1,7 @@
+# Directory labels
+ cu_cp
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/cu_cp/routines/pdu_session_resource_setup_routine_test.cpp
+/home/bezerra/Workspace/srsran/tests/unittests/cu_cp/routines/pdu_session_resource_release_routine_test.cpp
+/home/bezerra/Workspace/srsran/tests/unittests/cu_cp/routines/pdu_session_resource_modification_routine_test.cpp
+/home/bezerra/Workspace/srsran/tests/unittests/cu_cp/routines/ue_context_release_routine_test.cpp

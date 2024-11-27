@@ -1,0 +1,4 @@
+# Directory labels
+ ran
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/ran/pusch/ulsch_info_test.cpp

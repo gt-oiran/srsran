@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/bezerra/Workspace/srsran/tests/unittests/scheduler/pdcch/pdcch_resource_allocator_test.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"sched"
+		],
+		"name" : "pdcch_resource_allocator_test"
+	}
+}

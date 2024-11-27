@@ -1,0 +1,5 @@
+if(EXISTS "/home/bezerra/Workspace/srsran/build/tests/unittests/security/integrity_engine_test[1]_tests.cmake")
+  include("/home/bezerra/Workspace/srsran/build/tests/unittests/security/integrity_engine_test[1]_tests.cmake")
+else()
+  add_test(integrity_engine_test_NOT_BUILT integrity_engine_test_NOT_BUILT)
+endif()

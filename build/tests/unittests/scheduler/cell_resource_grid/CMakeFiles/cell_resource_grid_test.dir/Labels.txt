@@ -1,0 +1,5 @@
+# Directory labels
+ sched
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/scheduler/cell_resource_grid/sched_prb_test.cpp
+/home/bezerra/Workspace/srsran/tests/unittests/scheduler/cell_resource_grid/cell_resource_grid_test.cpp

@@ -1,0 +1,4 @@
+# Directory labels
+ security
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/security/ciphering_engine_test.cpp

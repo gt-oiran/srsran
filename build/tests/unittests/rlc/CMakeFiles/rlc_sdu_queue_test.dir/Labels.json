@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/bezerra/Workspace/srsran/tests/unittests/rlc/rlc_sdu_queue_test.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"rlc"
+		],
+		"name" : "rlc_sdu_queue_test"
+	}
+}

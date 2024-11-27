@@ -1,0 +1,4 @@
+# Directory labels
+ cu_up
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/cu_up/cu_up_test.cpp

@@ -1,0 +1,4 @@
+# Directory labels
+ du_manager
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/du_manager/du_ue/ue_manager_test.cpp

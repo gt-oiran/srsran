@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/bezerra/Workspace/srsran/tests/unittests/support/function_signature_test.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"support"
+		],
+		"name" : "function_signature_test"
+	}
+}

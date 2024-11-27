@@ -1,0 +1,5 @@
+if(EXISTS "/home/bezerra/Workspace/srsran/build/tests/unittests/mac/mac_test[1]_tests.cmake")
+  include("/home/bezerra/Workspace/srsran/build/tests/unittests/mac/mac_test[1]_tests.cmake")
+else()
+  add_test(mac_test_NOT_BUILT mac_test_NOT_BUILT)
+endif()

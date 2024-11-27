@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/bezerra/Workspace/srsran/tests/unittests/scheduler/test_utils/config_generators.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"sched"
+		],
+		"name" : "scheduler_test_utils"
+	}
+}

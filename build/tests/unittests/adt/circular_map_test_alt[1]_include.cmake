@@ -1,0 +1,5 @@
+if(EXISTS "/home/bezerra/Workspace/srsran/build/tests/unittests/adt/circular_map_test_alt[1]_tests.cmake")
+  include("/home/bezerra/Workspace/srsran/build/tests/unittests/adt/circular_map_test_alt[1]_tests.cmake")
+else()
+  add_test(circular_map_test_alt_NOT_BUILT circular_map_test_alt_NOT_BUILT)
+endif()

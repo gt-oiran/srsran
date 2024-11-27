@@ -1,0 +1,4 @@
+# Directory labels
+ psup
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/psup/psup_packing_test.cpp

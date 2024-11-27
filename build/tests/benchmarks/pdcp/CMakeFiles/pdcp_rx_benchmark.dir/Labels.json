@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/bezerra/Workspace/srsran/tests/benchmarks/pdcp/pdcp_rx_benchmark.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"pdcp"
+		],
+		"name" : "pdcp_rx_benchmark"
+	}
+}

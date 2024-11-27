@@ -1,0 +1,4 @@
+# Directory labels
+ du_manager
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/du_manager/pucch_resource_generator_test.cpp

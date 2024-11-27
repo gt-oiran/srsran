@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/bezerra/Workspace/srsran/tests/unittests/scheduler/multi_cell_scheduler_test.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"sched"
+		],
+		"name" : "multi_cell_scheduler_test"
+	}
+}

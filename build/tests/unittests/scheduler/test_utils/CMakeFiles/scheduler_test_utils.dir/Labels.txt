@@ -1,0 +1,4 @@
+# Directory labels
+ sched
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/unittests/scheduler/test_utils/config_generators.cpp

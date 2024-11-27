@@ -1,0 +1,5 @@
+if(EXISTS "/home/bezerra/Workspace/srsran/build/tests/unittests/ofh/ethernet/ethernet_frame_pool_test[1]_tests.cmake")
+  include("/home/bezerra/Workspace/srsran/build/tests/unittests/ofh/ethernet/ethernet_frame_pool_test[1]_tests.cmake")
+else()
+  add_test(ethernet_frame_pool_test_NOT_BUILT ethernet_frame_pool_test_NOT_BUILT)
+endif()

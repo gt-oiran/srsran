@@ -1,0 +1,5 @@
+if(EXISTS "/home/bezerra/Workspace/srsran/build/tests/unittests/scheduler/cell_resource_grid/cell_resource_grid_test[1]_tests.cmake")
+  include("/home/bezerra/Workspace/srsran/build/tests/unittests/scheduler/cell_resource_grid/cell_resource_grid_test[1]_tests.cmake")
+else()
+  add_test(cell_resource_grid_test_NOT_BUILT cell_resource_grid_test_NOT_BUILT)
+endif()

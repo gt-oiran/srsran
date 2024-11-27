@@ -1,0 +1,4 @@
+# Directory labels
+ sched
+# Source files and their labels
+/home/bezerra/Workspace/srsran/tests/benchmarks/scheduler/scheduler_multi_ue_benchmark.cpp
